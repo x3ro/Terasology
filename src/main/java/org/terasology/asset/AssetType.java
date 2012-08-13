@@ -19,12 +19,7 @@ package org.terasology.asset;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import org.terasology.asset.loaders.GLSLShaderLoader;
-import org.terasology.asset.loaders.MaterialLoader;
-import org.terasology.asset.loaders.ObjMeshLoader;
-import org.terasology.asset.loaders.OggSoundLoader;
-import org.terasology.asset.loaders.OggStreamingSoundLoader;
-import org.terasology.asset.loaders.PNGTextureLoader;
+import org.terasology.asset.loaders.*;
 import org.terasology.world.block.loader.TileLoader;
 import org.terasology.world.block.shapes.JsonBlockShapeLoader;
 
@@ -63,7 +58,9 @@ public enum AssetType {
     },
     MATERIAL("material", "materials", "mat", new MaterialLoader()),
     BLOCK_DEFINITION("blockdef", "blocks", null, null),
-    BLOCK_TILE("blocktile", "blockTiles", "png", new TileLoader());
+    BLOCK_TILE("blocktile", "blockTiles", "png", new TileLoader()),
+    MENU_DEFINITION("menudef", "menus", "json", new MenuDefinitionLoader()),
+    GUI_STYLE("guistyle", "guiStyles", null, null);
 
 
 
