@@ -28,7 +28,12 @@ import java.util.HashMap;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public class UIDisplayWindow extends UIScrollableDisplayContainer {
+import org.terasology.asset.Asset;
+import org.terasology.asset.AssetUri;
+
+public class UIDisplayWindow extends UIScrollableDisplayContainer implements Asset {
+
+    protected AssetUri assetUri;
 
     private enum eWindowEvent {OPEN, CLOSE};
     private final ArrayList<WindowListener> _windowListeners = new ArrayList<WindowListener>();
@@ -219,5 +224,15 @@ public class UIDisplayWindow extends UIScrollableDisplayContainer {
         super.setVisible(visible);
         
         GUIManager.getInstance().checkMouseMovement();
+    }
+
+    @Override
+    public AssetUri getURI() {
+        return assetUri;
+    }
+
+    @Override
+    public void dispose() {
+        throw new UnsupportedOperationException();
     }
 }
