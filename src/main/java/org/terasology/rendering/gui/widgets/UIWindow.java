@@ -26,6 +26,11 @@ import org.terasology.rendering.gui.framework.events.ClickListener;
 import org.terasology.rendering.gui.framework.events.KeyListener;
 import org.terasology.rendering.gui.framework.events.WindowListener;
 
+import static org.lwjgl.opengl.GL11.*;
+
+import org.terasology.asset.Asset;
+import org.terasology.asset.AssetUri;
+
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,9 +42,11 @@ import java.util.logging.Logger;
  * 
  * TODO closeBinds/closeKeys needs to be handled in another way.. (its not really a close -> setVisible(false))
  */
-public class UIWindow extends UIDisplayContainerScrollable {
-    
+public class UIWindow extends UIDisplayContainerScrollable implements Asset {
+
     private Logger logger = Logger.getLogger(getClass().getName());
+
+    protected AssetUri assetUri;
 
     //events
     private static enum EWindowEvent {INITIALISE, SHUTDOWN};
@@ -199,5 +206,15 @@ public class UIWindow extends UIDisplayContainerScrollable {
     public void shutdown() {
         logger.log(Level.INFO, "Shutdown window with with ID \"" + getId() + "\"");
         notifyWindowListeners(EWindowEvent.SHUTDOWN);
+    }
+
+    @Override
+    public AssetUri getURI() {
+        return assetUri;
+    }
+
+    @Override
+    public void dispose() {
+        throw new UnsupportedOperationException();
     }
 }
