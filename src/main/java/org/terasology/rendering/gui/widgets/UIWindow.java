@@ -23,6 +23,11 @@ import org.terasology.rendering.gui.framework.UIDisplayElement;
 import org.terasology.rendering.gui.framework.UIDisplayContainerScrollable;
 import org.terasology.rendering.gui.framework.events.WindowListener;
 
+import static org.lwjgl.opengl.GL11.*;
+
+import org.terasology.asset.Asset;
+import org.terasology.asset.AssetUri;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -32,7 +37,9 @@ import java.util.HashMap;
  * @author Marcel Lehwald <marcel.lehwald@googlemail.com>
  * 
  */
-public class UIWindow extends UIDisplayContainerScrollable {
+public class UIWindow extends UIDisplayContainerScrollable implements Asset {
+
+    protected AssetUri assetUri;
 
     //events
     private enum eWindowEvent {OPEN, CLOSE};
@@ -225,5 +232,15 @@ public class UIWindow extends UIDisplayContainerScrollable {
      */
     public void close() {
         setVisible(false);
+    }
+
+    @Override
+    public AssetUri getURI() {
+        return assetUri;
+    }
+
+    @Override
+    public void dispose() {
+        throw new UnsupportedOperationException();
     }
 }
