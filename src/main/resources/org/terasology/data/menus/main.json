@@ -1,0 +1,14 @@
+{
+    "id": "main-menu",
+    "controller": "UIMainMenu",
+    "children": [
+        {
+            "id": "version-number",
+            "component": "UIText",
+            "style": {
+                "text": "v0.1",
+                "position": [200, 200]
+            }
+        }
+    ]
+}
