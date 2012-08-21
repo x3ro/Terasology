@@ -50,6 +50,7 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GLContext;
 import org.terasology.asset.AssetManager;
 import org.terasology.asset.AssetType;
+import org.terasology.asset.AssetUri;
 import org.terasology.asset.sources.ClasspathSource;
 import org.terasology.game.modes.GameState;
 import org.terasology.logic.manager.AudioManager;
@@ -64,6 +65,7 @@ import org.terasology.performanceMonitor.PerformanceMonitor;
 import org.terasology.physics.CollisionGroupManager;
 
 import com.google.common.collect.Lists;
+import org.terasology.rendering.gui.framework.UIDisplayWindow;
 
 /**
  * @author Immortius
@@ -352,6 +354,9 @@ public class TerasologyEngine implements GameEngine {
 
         AssetType.registerAssetTypes();
         AssetManager.getInstance().addAssetSource(new ClasspathSource("engine", getClass().getProtectionDomain().getCodeSource(), "org/terasology/data"));
+
+        System.out.println(AssetManager.load(new AssetUri("menudef:engine:main"), UIDisplayWindow.class));
+        System.exit(0);
 
         ShaderManager.getInstance();
         VertexBufferObjectManager.getInstance();
