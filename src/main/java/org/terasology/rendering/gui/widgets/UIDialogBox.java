@@ -191,7 +191,7 @@ public class UIDialogBox extends UIWindow {
             container.resize();
     }
     
-    private void drag(Vector2f pos) {
+    protected void drag(Vector2f pos) {
         pos.x -= pressedOffset.x;
         pos.y -= pressedOffset.y;
         setPosition(pos);

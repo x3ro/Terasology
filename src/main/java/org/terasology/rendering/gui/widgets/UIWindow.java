@@ -23,6 +23,12 @@ import org.terasology.rendering.gui.framework.UIDisplayElement;
 import org.terasology.rendering.gui.framework.UIDisplayContainerScrollable;
 import org.terasology.rendering.gui.framework.events.WindowListener;
 
+import javax.vecmath.Vector2f;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import static org.lwjgl.opengl.GL11.*;
 
 import org.terasology.asset.Asset;
@@ -39,7 +45,9 @@ import java.util.HashMap;
  */
 public class UIWindow extends UIDisplayContainerScrollable implements Asset {
 
-    protected AssetUri assetUri;
+    protected final String id;
+    protected final AssetUri assetUri;
+    protected final List<UIDisplayElement> elements;
 
     //events
     private enum eWindowEvent {OPEN, CLOSE};
@@ -53,9 +61,45 @@ public class UIWindow extends UIDisplayContainerScrollable implements Asset {
     
     //layout
     private boolean modal = false;
-    
+
+
+    /*
+     * TODO: This constructor exists only for compatibility with old UI code and should be
+     * removed once migration to the new system is complete.
+     */
     public UIWindow() {
-        
+        this.id = null;
+        this.assetUri = null;
+        this.elements = null;
+    }
+
+
+    public UIWindow(String id, AssetUri assetUri, List<UIDisplayElement> elements) {
+        this.id = id;
+        this.assetUri = assetUri;
+        this.elements = elements;
+    }
+
+    protected void drag(Vector2f value) {
+        getPosition().x -= value.x;
+        getPosition().y -= value.y;
+    }
+
+    /**
+     * Close a window. This will just make the window invisible, it will not be removed from the GUIManager.
+     * @param clearInputControls
+     */
+    public void close(boolean clearInputControls) {
+        setVisible(false);
+        setFocus(null);
+        if (clearInputControls) {
+            clearInputControls();
+        }
+    }
+
+    public void show() {
+        setVisible(true);
+        setFocus(this);
     }
 
     public void clearInputControls() {
