@@ -148,4 +148,9 @@ public class UIText extends UIDisplayElement {
     public void removeChangedListener(ChangedListener listener) {
         changedListeners.remove(listener);
     }
+
+    @Override
+    public String[] getVisualStates() {
+        return new String[] { "hover" };
+    }
 }

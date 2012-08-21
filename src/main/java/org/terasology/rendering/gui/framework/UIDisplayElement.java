@@ -29,6 +29,7 @@ import org.lwjgl.opengl.Display;
 import org.terasology.input.events.KeyEvent;
 import org.terasology.input.BindButtonEvent;
 import org.terasology.logic.manager.ShaderManager;
+import org.terasology.rendering.gui.UIElementVisualManager;
 import org.terasology.rendering.gui.framework.events.ClickListener;
 import org.terasology.rendering.gui.framework.events.FocusListener;
 import org.terasology.rendering.gui.framework.events.MouseButtonListener;
@@ -44,6 +45,9 @@ import org.terasology.rendering.gui.framework.events.MouseMoveListener;
  */
 public abstract class UIDisplayElement {
 
+    protected String id;
+    protected UIElementVisualManager visualManager;
+
     protected static UIDisplayElement focusedElement;
     private UIDisplayElement parent;
     
@@ -53,6 +57,7 @@ public abstract class UIDisplayElement {
     private final ArrayList<ClickListener> clickListeners = new ArrayList<ClickListener>();
     private final ArrayList<FocusListener> focusListeners = new ArrayList<FocusListener>();
     private static enum EMouseEvents {ENTER, LEAVE, HOVER, MOVE};
+
     private EMouseEvents lastMouseState;
     private boolean mouseIsDown = false;
     
@@ -724,5 +729,18 @@ public abstract class UIDisplayElement {
 
     public void removeMouseMoveListener(MouseMoveListener listener) {
         mouseListeners.remove(listener);
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setVisualManager(UIElementVisualManager visualManager) {
+        this.visualManager = visualManager;
+    }
+
+    // TODO: declare abstract once all classes have been adjusted
+    public String[] getVisualStates() {
+        return null;
     }
 }
