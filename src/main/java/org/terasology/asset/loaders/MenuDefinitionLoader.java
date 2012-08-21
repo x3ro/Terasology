@@ -13,11 +13,8 @@ import java.net.URL;
 import java.util.List;
 
 /**
- * Created with IntelliJ IDEA.
- * User: lucas
- * Date: 8/12/12
- * Time: 8:10 PM
- * To change this template use File | Settings | File Templates.
+ * Creates concrete UIDisplayWindow instances from JSON menu definitions.
+ * @author Lucas Jenss <public@x3ro.de>
  */
 public class MenuDefinitionLoader implements AssetLoader<UIDisplayWindow> {
     @Override
