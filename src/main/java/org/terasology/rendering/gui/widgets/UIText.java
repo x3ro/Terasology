@@ -1239,4 +1239,9 @@ public class UIText extends UIDisplayContainerScrollable {
     public void removeChangedListener(ChangedListener listener) {
         changedListeners.remove(listener);
     }
+
+    @Override
+    public String[] getVisualStates() {
+        return new String[] { "hover" };
+    }
 }
