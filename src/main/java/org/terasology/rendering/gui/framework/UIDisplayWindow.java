@@ -25,6 +25,7 @@ import javax.vecmath.Vector2f;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -33,7 +34,9 @@ import org.terasology.asset.AssetUri;
 
 public class UIDisplayWindow extends UIScrollableDisplayContainer implements Asset {
 
-    protected AssetUri assetUri;
+    protected final String id;
+    protected final AssetUri assetUri;
+    protected final List<UIDisplayElement> elements;
 
     private enum eWindowEvent {OPEN, CLOSE};
     private final ArrayList<WindowListener> _windowListeners = new ArrayList<WindowListener>();
@@ -42,6 +45,24 @@ public class UIDisplayWindow extends UIScrollableDisplayContainer implements Ass
     private boolean _modal = false;
     private String[] closeBinds;
     private int[] closeKeys;
+
+
+    /*
+     * TODO: This constructor exists only for compatibility with old UI code and should be
+     * removed once migration to the new system is complete.
+     */
+    public UIDisplayWindow() {
+        this.id = null;
+        this.assetUri = null;
+        this.elements = null;
+    }
+
+
+    public UIDisplayWindow(String id, AssetUri assetUri, List<UIDisplayElement> elements) {
+        this.id = id;
+        this.assetUri = assetUri;
+        this.elements = elements;
+    }
 
     protected void drag(Vector2f value) {
         getPosition().x -= value.x;
