@@ -8,8 +8,9 @@ class UIElementVisualManager {
     def states = [:]
 
     UIElementVisualManager(config) {
-        this.element = createUIElement(config)
-        this.element.visualManager = this;
+        println(config)
+        //this.element = createUIElement(config)
+        //this.element.visualManager = this;
     }
 
     def createUIElement(config) {

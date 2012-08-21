@@ -26,6 +26,12 @@ import org.terasology.rendering.gui.framework.events.ClickListener;
 import org.terasology.rendering.gui.framework.events.KeyListener;
 import org.terasology.rendering.gui.framework.events.WindowListener;
 
+import javax.vecmath.Vector2f;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import static org.lwjgl.opengl.GL11.*;
 
 import org.terasology.asset.Asset;
@@ -46,7 +52,9 @@ public class UIWindow extends UIDisplayContainerScrollable implements Asset {
 
     private Logger logger = Logger.getLogger(getClass().getName());
 
-    protected AssetUri assetUri;
+    protected final String id;
+    protected final AssetUri assetUri;
+    protected final List<UIDisplayElement> elements;
 
     //events
     private static enum EWindowEvent {INITIALISE, SHUTDOWN};
@@ -58,7 +66,12 @@ public class UIWindow extends UIDisplayContainerScrollable implements Asset {
     
     //layout
     private boolean modal = false;
-    
+
+
+    /*
+     * TODO: This constructor exists only for compatibility with old UI code and should be
+     * removed once migration to the new system is complete.
+     */
     public UIWindow() {
         addClickListener(new ClickListener() {
             @Override
@@ -82,7 +95,7 @@ public class UIWindow extends UIDisplayContainerScrollable implements Asset {
                 }
             }
         });
-        
+
         addBindKeyListener(new BindKeyListener() {
             @Override
             public void key(UIDisplayElement element, BindButtonEvent event) {
@@ -91,13 +104,24 @@ public class UIWindow extends UIDisplayContainerScrollable implements Asset {
                         if (key.equals(event.getId()) && event.isDown()) {
                             setVisible(false);
                             event.consume();
-                            
+
                             return;
                         }
                     }
                 }
             }
         });
+
+        this.id = null;
+        this.assetUri = null;
+        this.elements = null;
+    }
+
+
+    public UIWindow(String id, AssetUri assetUri, List<UIDisplayElement> elements) {
+        this.id = id;
+        this.assetUri = assetUri;
+        this.elements = elements;
     }
 
     private void notifyWindowListeners(EWindowEvent event) {
