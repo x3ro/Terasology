@@ -73,11 +73,15 @@ public class UIWindow extends UIDisplayContainerScrollable implements Asset {
         this.elements = null;
     }
 
-
     public UIWindow(String id, AssetUri assetUri, List<UIDisplayElement> elements) {
         this.id = id;
         this.assetUri = assetUri;
         this.elements = elements;
+
+        for(UIDisplayElement element : elements) {
+            addDisplayElement(element);
+            element.setVisible(true);
+        }
     }
 
     protected void drag(Vector2f value) {
