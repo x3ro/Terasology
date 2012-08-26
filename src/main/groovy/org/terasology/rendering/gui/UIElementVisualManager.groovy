@@ -1,10 +1,12 @@
 package org.terasology.rendering.gui
 
+import org.terasology.rendering.gui.framework.UIDisplayElement
+
 
 
 class UIElementVisualManager {
 
-    def element
+    UIDisplayElement element
     def states = [:]
 
     UIElementVisualManager(config) {
