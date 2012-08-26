@@ -17,6 +17,8 @@ package org.terasology.game.modes;
 
 import java.util.Iterator;
 
+import org.terasology.asset.AssetManager;
+import org.terasology.asset.AssetUri;
 import org.terasology.components.LocalPlayerComponent;
 import org.terasology.entitySystem.ComponentSystem;
 import org.terasology.entitySystem.EntityRef;
@@ -31,6 +33,7 @@ import org.terasology.input.InputSystem;
 import org.terasology.logic.LocalPlayer;
 import org.terasology.logic.manager.AudioManager;
 import org.terasology.logic.manager.GUIManager;
+import org.terasology.rendering.gui.widgets.UIWindow;
 import org.terasology.rendering.gui.windows.*;
 
 import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
@@ -59,7 +62,7 @@ public class StateMainMenu implements GameState {
     private CameraTargetSystem cameraTargetSystem;
     
     //SCREENS
-    private UIMenuMain _mainMenu;
+    private UIWindow _mainMenu;
     private UIMenuConfig _configMenu;
     private UIMenuConfigVideo _configMenuVideo;
     private UIMenuConfigAudio _configMenuAudio;
@@ -93,7 +96,8 @@ public class StateMainMenu implements GameState {
         CoreRegistry.put(LocalPlayer.class, new LocalPlayer(EntityRef.NULL));
 
         //setup the GUI
-        _mainMenu = new UIMenuMain();
+        _mainMenu = AssetManager.load(new AssetUri("menudef:engine:main"), UIWindow.class); //new UIMenuMain();
+        _mainMenu.setVisible(true);
         
         _selectWorldMenu = new UIMenuSelectWorld();
         
