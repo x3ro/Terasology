@@ -66,7 +66,7 @@ import org.terasology.physics.CollisionGroupManager;
 import org.terasology.version.TerasologyVersion;
 
 import com.google.common.collect.Lists;
-import org.terasology.rendering.gui.framework.UIDisplayWindow;
+import org.terasology.rendering.gui.widgets.UIWindow;
 
 /**
  * @author Immortius
@@ -360,7 +360,7 @@ public class TerasologyEngine implements GameEngine {
         AssetType.registerAssetTypes();
         AssetManager.getInstance().addAssetSource(new ClasspathSource("engine", getClass().getProtectionDomain().getCodeSource(), "org/terasology/data"));
 
-        System.out.println(AssetManager.load(new AssetUri("menudef:engine:main"), UIDisplayWindow.class));
+        System.out.println(AssetManager.load(new AssetUri("menudef:engine:main"), UIWindow.class));
         System.exit(0);
 
         ShaderManager.getInstance();

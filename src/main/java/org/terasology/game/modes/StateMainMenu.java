@@ -17,6 +17,8 @@ package org.terasology.game.modes;
 
 import java.util.Iterator;
 
+import org.terasology.asset.AssetManager;
+import org.terasology.asset.AssetUri;
 import org.terasology.components.LocalPlayerComponent;
 import org.terasology.entitySystem.ComponentSystem;
 import org.terasology.entitySystem.EntityRef;

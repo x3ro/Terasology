@@ -17,7 +17,7 @@ class UIElementVisualManager {
     def createUIElement(config) {
         // Get the UIElement subclass name as specified in the "class" field.
         // Obviously needs some error checking, too.
-        def clazz = Class.forName("org.terasology.rendering.gui.components.${config["component"]}")
+        def clazz = Class.forName("org.terasology.rendering.gui.widgets.${config["component"]}")
 
         // Create a new instance of the retrieved UIElement subclass
         this.element = clazz.newInstance()
