@@ -16,7 +16,8 @@ class UIElementVisualManager {
 
     def createUIElement(config) {
         // Get the UIElement subclass name as specified in the "class" field.
-        // Obviously needs some error checking, too.
+        // TODO: Obviously needs some error checking, too.
+        // TODO: Currently only widgets in the default package are selectable :(
         def clazz = Class.forName("org.terasology.rendering.gui.widgets.${config["component"]}")
 
         // Create a new instance of the retrieved UIElement subclass
