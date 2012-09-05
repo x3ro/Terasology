@@ -118,6 +118,9 @@ public class UIWindow extends UIDisplayContainerScrollable implements Asset {
     }
 
     public UIWindow(String id, AssetUri assetUri, List<UIDisplayElement> elements) {
+        setModal(true);
+        maximize();
+
         this.id = id;
         this.assetUri = assetUri;
         this.elements = elements;
