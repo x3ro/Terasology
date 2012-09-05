@@ -21,7 +21,12 @@ class MenuDefinitionUnserializer {
         // the UIDisplayElement subclasses and manages their styles.
         def elements = data["children"].collect() { new UIElementVisualManager(it).element }
 
-        new UIWindow(data["id"], assetUri, elements)
+        // Now the UIWindow with all the generated elements is created, and the base styles
+        // for the window are applied (such as background)
+        def x = new UIWindow(data["id"], assetUri, elements)
+        UIElementVisualManager.applyState(data["style"], x)
+
+        return x
     }
 
 }
