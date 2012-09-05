@@ -29,6 +29,7 @@ import javax.vecmath.Vector2f;
 import javax.vecmath.Vector4f;
 
 import org.lwjgl.opengl.GL11;
+import org.terasology.asset.AssetManager;
 import org.terasology.logic.manager.ShaderManager;
 import org.terasology.rendering.assets.Texture;
 import org.terasology.rendering.gui.framework.UIDisplayElement;
@@ -230,5 +231,9 @@ public class UIImage extends UIDisplayElement {
 
     public float getRotateAngle() {
         return rotate;
+    }
+
+    public void setBackgroundImage(String assetUri) {
+        setTexture(AssetManager.loadTexture(assetUri));
     }
 }
