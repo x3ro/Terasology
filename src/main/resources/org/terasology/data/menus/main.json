@@ -1,6 +1,7 @@
 {
     "id": "main-menu",
     "controller": "UIMainMenu",
+
     "children": [
         {
             "id": "version-number",
@@ -10,5 +11,9 @@
                 "position": [200, 200]
             }
         }
-    ]
+    ],
+
+    "style": {
+        "backgroundImage": "engine:menubackground"
+    }
 }
