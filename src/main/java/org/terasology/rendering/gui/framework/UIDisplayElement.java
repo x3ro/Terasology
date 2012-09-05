@@ -384,8 +384,30 @@ public abstract class UIDisplayElement {
         this.verticalAlign = verticalAlign;
     }
 
+    /**
+     * Used by the JSON menu definition system (from which we can only get strings)
+     * TODO: @see #setHalign for explanation of naming trouble
+     * @param align
+     */
+    public void setValign(String align) {
+        this.verticalAlign = EVerticalAlign.valueOf(align.toUpperCase());
+    }
+
     public EHorizontalAlign getHorizontalAlign() {
         return horizontalAlign;
+    }
+
+    /**
+     * Used by the JSON menu definition system (from which we can only get strings)
+     * TODO: The method currently has a not-so-nice name because Groovy can not differentiate
+     * between enum and string (?) and therefore calls the "setHorizontalAlign" with the
+     * enum parameter if the methods have the same name. Because of that we either have
+     * to get rid of the version taking the enum parameter or decide on another name for
+     * the method invoked by the menu definition system.
+     * @param align
+     */
+    public void setHalign(String align) {
+        this.horizontalAlign = EHorizontalAlign.valueOf(align.toUpperCase());
     }
 
     public void setHorizontalAlign(EHorizontalAlign horizontalAlign) {

@@ -7,8 +7,10 @@
             "id": "version-number",
             "component": "UIText",
             "style": {
-                "text": "v0.1",
-                "position": [200, 200]
+                "text": "Pre Alpha",
+                "position": [0, 230],
+                "halign": "center",
+                "valign": "top"
             }
         }
     ],
