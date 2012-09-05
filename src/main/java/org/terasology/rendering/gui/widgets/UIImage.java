@@ -30,6 +30,7 @@ import javax.vecmath.Vector4f;
 
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
+import org.terasology.asset.AssetManager;
 import org.terasology.logic.manager.ShaderManager;
 import org.terasology.rendering.assets.Texture;
 import org.terasology.rendering.gui.framework.UIDisplayContainer;
@@ -231,5 +232,9 @@ public class UIImage extends UIDisplayContainer {
 
     public float getRotateAngle() {
         return rotate;
+    }
+
+    public void setBackgroundImage(String assetUri) {
+        setTexture(AssetManager.loadTexture(assetUri));
     }
 }
