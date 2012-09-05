@@ -32,9 +32,26 @@ class UIElementVisualManager {
         return this.element
     }
 
-    def applyState(name) {
-        this.states[name].each() { key, value -> element."${key}" = value }
+
+    /**
+     * Activates the given state (and the associated styles) for the
+     * managed by this UIElementVisualManager
+     * @param name Name of the state to be activated
+     */
+    def void applyState(String name) {
+        applyState(this.states[name], element)
     }
 
 
+    /**
+     * Applies the given Map of styles to the element by setting the property with
+     * the respective name. When setting properties on a Java object, Groovy invokes a
+     * setter with named "set<PropertyName>", e.g. if the property was named "background",
+     * the setter invoked would be "setBackground".
+     * @param styles
+     * @param element
+     */
+    static def void applyState(Map styles, UIDisplayElement element) {
+        styles.each() { key, value -> element."${key}" = value }
+    }
 }
