@@ -20,6 +20,8 @@ import java.util.logging.Logger;
 
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
+import org.terasology.asset.AssetManager;
+import org.terasology.asset.AssetUri;
 import org.terasology.components.LocalPlayerComponent;
 import org.terasology.entitySystem.EntityRef;
 import org.terasology.entitySystem.EventHandlerSystem;
@@ -234,9 +236,7 @@ public class GUIManager implements EventHandlerSystem {
         }
          
         //TODO parser action here! this is temporary
-        if (windowId.equals("main")) {
-            window = new UIMenuMain();
-        } else if (windowId.equals("singleplayer")) {
+        if (windowId.equals("singleplayer")) {
             window = new UIMenuSingleplayer();
         } else if (windowId.equals("multiplayer")) {
             window = new UIMenuMultiplayer();
@@ -272,6 +272,9 @@ public class GUIManager implements EventHandlerSystem {
             window = new UIMinionBehaviourMenu();
         } else if (windowId.equals("itemList")) {
             window = new UIScreenItems();
+        } else {
+            // TODO by x3ro: We need a way to not only load menu definitions from the "engine" package.
+            window = AssetManager.load(new AssetUri("menudef:engine:" + windowId), UIWindow.class);
         }
         
         if (window == null) {
