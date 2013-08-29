@@ -1,0 +1,32 @@
+{
+    "id": "main-menu",
+    "controller": "UIMainMenu",
+
+    "children": [
+        {
+            "id": "version-number",
+            "component": "UIText",
+            "style": {
+                "text": "Pre Alpha",
+                "position": [0, 230],
+                "halign": "center",
+                "valign": "top"
+            }
+        },
+
+        {
+            "id": "terasology-logo",
+            "component": "UIImage",
+            "style": {
+                "backgroundImage": "engine:terasology",
+                "size": [512, 128],
+                "position": [0, 128],
+                "halign": "center"
+            }
+        }
+    ],
+
+    "style": {
+        "backgroundImage": "engine:menubackground"
+    }
+}

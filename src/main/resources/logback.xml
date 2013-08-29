@@ -17,10 +17,11 @@
         </encoder>
     </appender>
 
-    <logger name="org.terasology" level="INFO"/>
-    <logger name="org.terasology.network" level="DEBUG"/>
-    <logger name="org.terasology.persistence" level="INFO"/>
-    <logger name="org.reflections.Reflections" level="WARN"/>
+    <logger name="org.terasology" level="ERROR"/>
+    <logger name="org.terasology.rendering.gui" level="DEBUG"/>
+    <logger name="org.terasology.network" level="ERROR"/>
+    <logger name="org.terasology.persistence" level="ERROR"/>
+    <logger name="org.reflections.Reflections" level="ERROR"/>
 
     <root level="debug">
         <appender-ref ref="CONSOLE" />

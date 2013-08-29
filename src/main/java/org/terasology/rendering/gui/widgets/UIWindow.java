@@ -17,8 +17,11 @@ package org.terasology.rendering.gui.widgets;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.terasology.asset.Asset;
+import org.terasology.asset.AssetUri;
 import org.terasology.input.BindButtonEvent;
 import org.terasology.input.events.KeyEvent;
+import org.terasology.rendering.gui.LayoutDefinition;
 import org.terasology.rendering.gui.animation.AnimationOpacity;
 import org.terasology.rendering.gui.framework.UIDisplayContainerScrollable;
 import org.terasology.rendering.gui.framework.UIDisplayElement;
@@ -139,6 +142,10 @@ public class UIWindow extends UIDisplayContainerScrollable {
         this.closeKeys = keys;
     }
 
+    public void setFoo(int test) {
+        System.out.println("setting foo to " + test);
+    }
+
     @Override
     public void setVisible(boolean visible) {
         if (!visible && isVisible()) {
@@ -190,7 +197,7 @@ public class UIWindow extends UIDisplayContainerScrollable {
         logger.debug("Shutdown window with with ID \"{}\"", getId());
         notifyWindowListeners(EWindowEvent.SHUTDOWN);
     }
-    
+
     /*
        Event listeners
     */

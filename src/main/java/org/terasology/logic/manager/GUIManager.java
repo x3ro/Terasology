@@ -20,6 +20,8 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.terasology.asset.AssetManager;
+import org.terasology.asset.AssetUri;
 import org.terasology.engine.CoreRegistry;
 import org.terasology.engine.GameEngine;
 import org.terasology.entitySystem.EntityManager;
@@ -35,6 +37,7 @@ import org.terasology.input.events.MouseWheelEvent;
 import org.terasology.input.events.MouseXAxisEvent;
 import org.terasology.input.events.MouseYAxisEvent;
 import org.terasology.network.ClientComponent;
+import org.terasology.rendering.gui.LayoutDefinition;
 import org.terasology.rendering.gui.events.UIWindowOpenedEvent;
 import org.terasology.rendering.gui.framework.UIDisplayElement;
 import org.terasology.rendering.gui.framework.UIDisplayRenderer;
@@ -281,20 +284,19 @@ public class GUIManager implements ComponentSystem {
             return window;
         }
 
-        Class<? extends UIWindow> windowClass = registeredWindows.get(windowId);
-        if (windowClass != null) {
-            logger.debug("Loading window with ID \"{}\".", windowId);
+        LayoutDefinition def = AssetManager.loadAssetData(
+                new AssetUri("layout:engine:main"), LayoutDefinition.class
+        );
 
-            try {
-                return addWindow(windowClass.newInstance());
-            } catch (InstantiationException e) {
-                logger.error("Failed to load window {}, no default constructor", windowId);
-            } catch (IllegalAccessException e) {
-                logger.error("Failed to load window {}, no default constructor", windowId);
-            }
-        }
-        logger.warn("Unable to load window \"{}\", unknown id", windowId);
-        return null;
+        //System.out.println(def);
+        //def.createWindow();
+        //System.exit(0);
+        return addWindow(def.createWindow());
+
+
+        //window = def.getWindow();
+
+
     }
 
     /**
@@ -352,9 +354,9 @@ public class GUIManager implements ComponentSystem {
         UIWindow messageWindow = new UIMessageBox(title, text);
         messageWindow.open();
     }
-    
-    
-    
+
+
+
     /*
        The following methods are responsible for receiving and processing mouse and keyboard inputs.
     */
@@ -403,7 +405,7 @@ public class GUIManager implements ComponentSystem {
     public void shutdown() {
 
     }
-    
+
     /*
       The following events will capture the mouse and keyboard inputs. They have the highest priority so the GUI will always come first.
       If a window is "modal" it will consume all input events so no other than the GUI will handle these events.
