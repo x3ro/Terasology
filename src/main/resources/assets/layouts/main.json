@@ -7,11 +7,13 @@
             "id": "version-number",
             "component": "UILabel",
             "style": {
-                "text": "From JSON",
-                "position": [0, 230],
-                "horizontalAlign": "center",
-                "verticalAlign": "top",
-                "textShadow": true
+                "default": {
+                    "text": "Pre Alpha",
+                    "position": [0, 230],
+                    "horizontalAlign": "center",
+                    "verticalAlign": "top",
+                    "textShadow": true
+                }
             }
         },
 
@@ -19,15 +21,19 @@
             "id": "terasology-logo",
             "component": "UIImage",
             "style": {
-                "image": "engine:terasology",
-                "size": [512, 128],
-                "position": [0, 128],
-                "horizontalAlign": "center"
+                "default": {
+                    "image": "engine:terasology",
+                    "size": [512, 128],
+                    "position": [0, 128],
+                    "horizontalAlign": "center"
+                }
             }
         }
     ],
 
     "style": {
-        "backgroundImage": "engine:menubackground"
+        "default": {
+            "backgroundImage": "engine:menubackground"
+        }
     }
 }

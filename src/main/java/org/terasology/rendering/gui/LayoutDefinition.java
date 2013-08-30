@@ -36,8 +36,12 @@ public class LayoutDefinition implements AssetData {
     public String controller;
     public String component;
 
+    // The outer elements are the element's states, the inner elements are style
+    // attribute for a state. For example,
+    //      style.get("hover").get("position")
+    // Would get the "position" style attribute in the "hover" state.
+    public Map<String, Map<String, Object>> style;
     public List<LayoutDefinition> children;
-    public Map<String, Object> style;
 
     public final String defaultWidgetPackage = "org.terasology.rendering.gui.widgets";
 
@@ -47,21 +51,27 @@ public class LayoutDefinition implements AssetData {
      * @return A new window based on the current layout definition.
      */
     public UIWindow createWindow() {
+        if(component != null) {
+            throw new IllegalArgumentException("Tried to create a window from a layout definition containing a component, which indicates that it defines a widget.");
+        }
+
         UIWindow window = new UIWindow();
 
-        for(Map.Entry<String, Object> e : style.entrySet()) {
+        // Apply window styles
+        for(Map.Entry<String, Object> e : style.get("default").entrySet()) {
             StyleApplicator.applyStyle(window, e.getKey(), e.getValue());
         }
 
-        window.setId(id);
-        window.setModal(true);
-        window.maximize();
-
+        // Create children widgets
         for(LayoutDefinition child : children) {
             UIDisplayElement el = child.createWidget();
             logger.debug("Adding display element '{}' to window with id '{}'", el.getId(), id);
             window.addDisplayElement(el);
         }
+
+        window.setId(id);
+        window.setModal(true);
+        window.maximize();
 
         return window;
     }
@@ -72,7 +82,7 @@ public class LayoutDefinition implements AssetData {
             throw new IllegalArgumentException("Could not create widget with id " + id);
         }
 
-        for(Map.Entry<String, Object> e : style.entrySet()) {
+        for(Map.Entry<String, Object> e : style.get("default").entrySet()) {
             StyleApplicator.applyStyle(widget, e.getKey(), e.getValue());
         }
 
@@ -106,6 +116,4 @@ public class LayoutDefinition implements AssetData {
 
         return instance;
     }
-
-
 }
