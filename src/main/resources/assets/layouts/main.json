@@ -5,12 +5,13 @@
     "children": [
         {
             "id": "version-number",
-            "component": "UIText",
+            "component": "UILabel",
             "style": {
-                "text": "Pre Alpha",
+                "text": "From JSON",
                 "position": [0, 230],
-                "halign": "center",
-                "valign": "top"
+                "horizontalAlign": "center",
+                "verticalAlign": "top",
+                "textShadow": true
             }
         },
 
@@ -18,10 +19,10 @@
             "id": "terasology-logo",
             "component": "UIImage",
             "style": {
-                "backgroundImage": "engine:terasology",
+                "image": "engine:terasology",
                 "size": [512, 128],
                 "position": [0, 128],
-                "halign": "center"
+                "horizontalAlign": "center"
             }
         }
     ],

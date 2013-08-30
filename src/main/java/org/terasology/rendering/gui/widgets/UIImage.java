@@ -20,6 +20,7 @@ import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.terasology.asset.Assets;
 import org.terasology.engine.CoreRegistry;
 import org.terasology.rendering.ShaderManager;
 import org.terasology.rendering.assets.mesh.Mesh;
@@ -176,6 +177,10 @@ public class UIImage extends UIDisplayContainer {
         if (texture != null) {
             setColor(new Color(1f, 1f, 1f, 1f));
         }
+    }
+
+    public void setImage(String assetUri) {
+        setTexture(Assets.getTexture(assetUri));
     }
 
     public Texture getTexture() {
