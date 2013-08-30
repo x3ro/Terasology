@@ -28,6 +28,19 @@
                     "horizontalAlign": "center"
                 }
             }
+        },
+
+        {
+            "id": "exit-button",
+            "component": "UIButton",
+            "style": {
+                "default": {
+                    "text": "Exit Terasology",
+                    "size": [256, 32],
+                    "position": [0, 540],
+                    "horizontalAlign": "center"
+                }
+            }
         }
     ],
 

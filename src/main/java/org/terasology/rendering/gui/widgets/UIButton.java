@@ -48,22 +48,12 @@ public class UIButton extends UIDisplayContainer {
     }
 
     private boolean toggleState;
-    private ButtonType buttonType;
+    private ButtonType buttonType = ButtonType.NORMAL;
 
     private final List<ChangedListener> changedListeners = new ArrayList<ChangedListener>();
     private final Map<String, Vector2f[]> states = new HashMap<String, Vector2f[]>();
 
-    /**
-     * Create a simple button, where 2 types are possible. The normal button and the toggle button.
-     *
-     * @param size       The size of the button.
-     * @param buttonType The type of the button which can be normal or toggle.
-     */
-    public UIButton(Vector2f size, ButtonType buttonType) {
-        setSize(size);
-
-        this.buttonType = buttonType;
-
+    public UIButton() {
         //default button
         setTexture("engine:gui_menu");
         setNormalState(new Vector2f(0f, 0f), new Vector2f(256f, 30f));
@@ -144,6 +134,18 @@ public class UIButton extends UIDisplayContainer {
         label.setTextShadow(true);
 
         addDisplayElement(label);
+    }
+
+    /**
+     * Create a simple button, where 2 types are possible. The normal button and the toggle button.
+     *
+     * @param size       The size of the button.
+     * @param buttonType The type of the button which can be normal or toggle.
+     */
+    public UIButton(Vector2f size, ButtonType buttonType) {
+        this();
+        setSize(size);
+        this.buttonType = buttonType;
     }
 
     public UILabel getLabel() {
@@ -236,5 +238,9 @@ public class UIButton extends UIDisplayContainer {
 
     public void removeChangedListener(ChangedListener listener) {
         changedListeners.remove(listener);
+    }
+
+    public void setText(String text) {
+        label.setText(text);
     }
 }
