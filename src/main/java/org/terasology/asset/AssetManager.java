@@ -29,6 +29,8 @@ import org.terasology.entitySystem.internal.PojoPrefab;
 import org.terasology.entitySystem.prefab.Prefab;
 import org.terasology.entitySystem.prefab.PrefabData;
 import org.terasology.persistence.ModuleContext;
+import org.terasology.rendering.gui.LayoutDefinition;
+import org.terasology.rendering.gui.widgets.UIWindow;
 import org.terasology.utilities.collection.NullIterator;
 import org.terasology.world.block.shapes.BlockShape;
 import org.terasology.world.block.shapes.BlockShapeData;
@@ -73,9 +75,19 @@ public class AssetManager {
                 return new BlockShapeImpl(uri, data);
             }
         });
+
         for (AssetType type : AssetType.values()) {
             uriLookup.put(type, HashBasedTable.<String, String, AssetUri>create());
         }
+
+        // TODO Lucas: This probably shouldn't be done here in the AssetManager.
+        // @Immortius: Where would be a better place to do this?
+        setAssetFactory(AssetType.LAYOUT_DEFINITION, new AssetFactory<LayoutDefinition, UIWindow>() {
+            @Override
+            public UIWindow buildAsset(AssetUri uri, LayoutDefinition data) {
+                return data.createWindow();
+            }
+        });
     }
 
     public void setAssetFactory(AssetType type, AssetFactory factory) {

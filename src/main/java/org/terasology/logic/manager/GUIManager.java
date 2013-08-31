@@ -20,8 +20,8 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.terasology.asset.AssetManager;
 import org.terasology.asset.AssetUri;
+import org.terasology.asset.Assets;
 import org.terasology.engine.CoreRegistry;
 import org.terasology.engine.GameEngine;
 import org.terasology.entitySystem.EntityManager;
@@ -37,7 +37,6 @@ import org.terasology.input.events.MouseWheelEvent;
 import org.terasology.input.events.MouseXAxisEvent;
 import org.terasology.input.events.MouseYAxisEvent;
 import org.terasology.network.ClientComponent;
-import org.terasology.rendering.gui.LayoutDefinition;
 import org.terasology.rendering.gui.events.UIWindowOpenedEvent;
 import org.terasology.rendering.gui.framework.UIDisplayElement;
 import org.terasology.rendering.gui.framework.UIDisplayRenderer;
@@ -284,19 +283,8 @@ public class GUIManager implements ComponentSystem {
             return window;
         }
 
-        LayoutDefinition def = AssetManager.loadAssetData(
-                new AssetUri("layout:engine:main"), LayoutDefinition.class
-        );
-
-        //System.out.println(def);
-        //def.createWindow();
-        //System.exit(0);
-        return addWindow(def.createWindow());
-
-
-        //window = def.getWindow();
-
-
+        UIWindow w = (UIWindow) Assets.get(new AssetUri("layout:engine:" + windowId));
+        return addWindow(w);
     }
 
     /**

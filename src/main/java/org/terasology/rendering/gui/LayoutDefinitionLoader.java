@@ -20,6 +20,7 @@ import com.google.common.io.Files;
 import com.google.gson.Gson;
 import org.terasology.asset.AssetLoader;
 import org.terasology.asset.AssetUri;
+import org.terasology.engine.module.Module;
 
 import java.io.*;
 import java.net.URL;
@@ -29,7 +30,7 @@ import java.util.List;
 public class LayoutDefinitionLoader implements AssetLoader<LayoutDefinition> {
 
     @Override
-    public LayoutDefinition load(AssetUri uri, InputStream stream, List<URL> urls) throws IOException {
+    public LayoutDefinition load(Module m, InputStream stream, List<URL> urls) throws IOException {
         Gson gson = new Gson();
         return gson.fromJson(new InputStreamReader(stream), LayoutDefinition.class);
     }

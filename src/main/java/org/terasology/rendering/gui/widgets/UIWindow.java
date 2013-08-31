@@ -29,6 +29,7 @@ import org.terasology.rendering.gui.framework.events.BindKeyListener;
 import org.terasology.rendering.gui.framework.events.ClickListener;
 import org.terasology.rendering.gui.framework.events.KeyListener;
 import org.terasology.rendering.gui.framework.events.WindowListener;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +41,7 @@ import java.util.List;
  *         <p/>
  *         TODO closeBinds/closeKeys needs to be handled in another way.. (its not really a close -> setVisible(false))
  */
-public class UIWindow extends UIDisplayContainerScrollable {
+public class UIWindow extends UIDisplayContainerScrollable implements Asset<LayoutDefinition> {
 
     private static final Logger logger = LoggerFactory.getLogger(UIWindow.class);
 
@@ -220,5 +221,31 @@ public class UIWindow extends UIDisplayContainerScrollable {
 
     public void removeWindowListener(WindowListener listener) {
         windowListeners.remove(listener);
+    }
+
+
+
+    /* =======================
+     * Asset Interface Methods
+     * ======================= */
+
+     @Override
+    public AssetUri getURI() {
+         throw new NotImplementedException();
+    }
+
+    @Override
+    public void reload(LayoutDefinition data) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public void dispose() {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public boolean isDisposed() {
+        throw new NotImplementedException();
     }
 }

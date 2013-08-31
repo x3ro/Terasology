@@ -15,16 +15,13 @@
  */
 package org.terasology.rendering.gui;
 
-import org.codehaus.groovy.runtime.ScriptBytecodeAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.terasology.asset.AssetData;
 import org.terasology.rendering.gui.framework.UIDisplayContainer;
 import org.terasology.rendering.gui.framework.UIDisplayElement;
-import org.terasology.rendering.gui.widgets.UILabel;
 import org.terasology.rendering.gui.widgets.UIWindow;
 
-import javax.vecmath.Vector2f;
 import java.util.List;
 import java.util.Map;
 
