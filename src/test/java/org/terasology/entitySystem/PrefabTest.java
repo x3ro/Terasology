@@ -32,6 +32,8 @@ import org.terasology.entitySystem.prefab.PrefabManager;
 import org.terasology.entitySystem.stubs.StringComponent;
 import org.terasology.network.NetworkMode;
 import org.terasology.network.NetworkSystem;
+import org.terasology.testUtil.AssetHelper;
+import org.terasology.utilities.collection.Tuple2;
 
 import java.net.URL;
 
@@ -52,15 +54,10 @@ public class PrefabTest {
 
     @Before
     public void setup() throws Exception {
-        ModuleManager moduleManager = new ModuleManager();
-        moduleManager.applyActiveModules();
-        AssetManager assetManager = new AssetManager(moduleManager);
-        CoreRegistry.put(ModuleManager.class, moduleManager);
-        CoreRegistry.put(AssetManager.class, assetManager);
-        AssetType.registerAssetTypes(assetManager);
-        URL url = getClass().getClassLoader().getResource("testResources");
-        url = new URL(url.toString().substring(0, url.toString().length() - "testResources".length() - 1));
-        assetManager.addAssetSource(new ClasspathSource("unittest", url, ModuleManager.ASSETS_SUBDIRECTORY, ModuleManager.OVERRIDES_SUBDIRECTORY));
+        Tuple2<ModuleManager, AssetManager> t = AssetHelper.addTestAssetPath(this);
+        ModuleManager moduleManager = t._1();
+        AssetManager assetManager = t._2();
+
         NetworkSystem networkSystem = mock(NetworkSystem.class);
         when(networkSystem.getMode()).thenReturn(NetworkMode.NONE);
         EntityManager em = new EntitySystemBuilder().build(moduleManager, networkSystem, new ReflectionReflectFactory());
