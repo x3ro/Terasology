@@ -48,11 +48,22 @@ public class LayoutDefinition implements AssetData {
      * @return A new window based on the current layout definition.
      */
     public UIWindow createWindow() {
+        UIWindow window = new UIWindow();
+        applyTo(window);
+        window.setModal(true);
+        window.maximize();
+        return window;
+    }
+
+    /**
+     * Applies the styles represented by the LayoutDefinition to the given window.
+     * @throws IllegalArgumentException if the LayoutDefinition is meant for a widget, that is, it has the
+     *         "component" attribute set.
+     */
+    public void applyTo(UIWindow window) {
         if(component != null) {
             throw new IllegalArgumentException("Tried to create a window from a layout definition containing a component, which indicates that it defines a widget.");
         }
-
-        UIWindow window = new UIWindow();
 
         // Apply window styles
         for(Map.Entry<String, Object> e : style.get("default").entrySet()) {
@@ -67,10 +78,6 @@ public class LayoutDefinition implements AssetData {
         }
 
         window.setId(id);
-        window.setModal(true);
-        window.maximize();
-
-        return window;
     }
 
     public UIDisplayContainer createWidget() {

@@ -236,7 +236,7 @@ public class UIWindow extends UIDisplayContainerScrollable implements Asset<Layo
 
     @Override
     public void reload(LayoutDefinition data) {
-        throw new NotImplementedException();
+        data.applyTo(this);
     }
 
     @Override
