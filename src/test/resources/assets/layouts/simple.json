@@ -1,0 +1,11 @@
+{
+    "id": "test-menu",
+    "children": [],
+    "style": {
+        "default": {
+            "modal": false,
+            "size": ["50%", "50%"]
+        }
+    }
+
+}
