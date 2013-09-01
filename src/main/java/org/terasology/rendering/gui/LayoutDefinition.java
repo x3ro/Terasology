@@ -41,6 +41,7 @@ public class LayoutDefinition implements AssetData {
     public List<LayoutDefinition> children;
 
     public final String defaultWidgetPackage = "org.terasology.rendering.gui.widgets";
+    public final String defaultControllerPackage = "org.terasology.rendering.gui.controllers";
 
 
 
@@ -52,6 +53,12 @@ public class LayoutDefinition implements AssetData {
         window.setModal(true);
         window.maximize();
         applyTo(window);
+
+        if(controller != null) {
+            UIController controller = instantiateController(this.controller);
+            controller.setWindow(window);
+        }
+
         return window;
     }
 
@@ -66,15 +73,19 @@ public class LayoutDefinition implements AssetData {
         }
 
         // Apply window styles
-        for(Map.Entry<String, Object> e : style.get("default").entrySet()) {
-            StyleApplicator.applyStyle(window, e.getKey(), e.getValue());
+        if(style != null) {
+            for(Map.Entry<String, Object> e : style.get("default").entrySet()) {
+                StyleApplicator.applyStyle(window, e.getKey(), e.getValue());
+            }
         }
 
         // Create children widgets
-        for(LayoutDefinition child : children) {
-            UIDisplayElement el = child.createWidget();
-            logger.debug("Adding display element '{}' to window with id '{}'", el.getId(), id);
-            window.addDisplayElement(el);
+        if(children != null) {
+            for(LayoutDefinition child : children) {
+                UIDisplayElement el = child.createWidget();
+                logger.debug("Adding display element '{}' to window with id '{}'", el.getId(), id);
+                window.addDisplayElement(el);
+            }
         }
 
         window.setId(id);
@@ -93,6 +104,37 @@ public class LayoutDefinition implements AssetData {
         widget.setId(id);
         widget.setVisible(true);
         return widget;
+    }
+
+    /**
+     * @todo this method an instantiateComponent must be properly refactored!
+     * @param controller
+     * @return
+     */
+    private UIController instantiateController(String controller) {
+        // If the component is not given including package(s), assume that it
+        // lives in the default widget package.
+        if(!controller.contains(".")) {
+            controller = defaultControllerPackage + "." + controller;
+        }
+
+        Class controllerClass = null;
+        try {
+            controllerClass = Class.forName(controller);
+        } catch (ClassNotFoundException e) {
+            logger.error("Could not find class matching controller '{}'", controller, e);
+            return null;
+        }
+
+        UIController instance;
+        try {
+            instance = (UIController) controllerClass.newInstance();
+        } catch (ClassCastException | IllegalAccessException | InstantiationException e) {
+            logger.error("Could not intantiate class matching controller '{}'", controller, e);
+            return null;
+        }
+
+        return instance;
     }
 
     private UIDisplayContainer instantiateComponent() {

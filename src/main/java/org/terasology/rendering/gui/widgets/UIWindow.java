@@ -22,6 +22,7 @@ import org.terasology.asset.AssetUri;
 import org.terasology.input.BindButtonEvent;
 import org.terasology.input.events.KeyEvent;
 import org.terasology.rendering.gui.LayoutDefinition;
+import org.terasology.rendering.gui.UIController;
 import org.terasology.rendering.gui.animation.AnimationOpacity;
 import org.terasology.rendering.gui.framework.UIDisplayContainerScrollable;
 import org.terasology.rendering.gui.framework.UIDisplayElement;
@@ -58,6 +59,15 @@ public class UIWindow extends UIDisplayContainerScrollable implements Asset<Layo
 
     //layout
     private boolean modal;
+
+
+
+    /**
+     * The controller contains the event handling code for widgets inside a window which
+     * are generated from the JSON GUI system.
+     */
+    private UIController controller;
+
 
     public UIWindow() {
         addClickListener(new ClickListener() {
@@ -221,6 +231,20 @@ public class UIWindow extends UIDisplayContainerScrollable implements Asset<Layo
 
     public void removeWindowListener(WindowListener listener) {
         windowListeners.remove(listener);
+    }
+
+    public void setController(UIController controller) {
+        this.controller = controller;
+    }
+
+    public <T extends UIDisplayElement> T getChild(Class<T> type, String id) {
+        List<UIDisplayElement> elements = getDisplayElements();
+        for(UIDisplayElement el : elements) {
+            if(!el.getId().equals(id)) { continue; }
+            return (T) el;
+        }
+
+        throw new IllegalArgumentException("Could not find child " + id + " within window " + this.getId());
     }
 
 

@@ -1,0 +1,25 @@
+{
+    "id": "main-menu",
+
+    "children": [
+        {
+            "id": "label",
+            "component": "UILabel",
+            "style": {
+                "default": {
+                    "text": "Hi, I'm the test window",
+                    "position": [0, 230],
+                    "horizontalAlign": "center",
+                    "verticalAlign": "top",
+                    "textShadow": true
+                }
+            }
+        }
+    ],
+
+    "style": {
+        "default": {
+            "backgroundImage": "engine:default"
+        }
+    }
+}

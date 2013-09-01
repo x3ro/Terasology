@@ -1,6 +1,6 @@
 {
     "id": "main-menu",
-    "controller": "UIMainMenu",
+    "controller": "MainMenuController",
 
     "children": [
         {
