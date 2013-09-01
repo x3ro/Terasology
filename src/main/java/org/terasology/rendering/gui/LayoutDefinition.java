@@ -49,9 +49,9 @@ public class LayoutDefinition implements AssetData {
      */
     public UIWindow createWindow() {
         UIWindow window = new UIWindow();
-        applyTo(window);
         window.setModal(true);
         window.maximize();
+        applyTo(window);
         return window;
     }
 
