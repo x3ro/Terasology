@@ -31,6 +31,58 @@
         },
 
         {
+            "id": "settings-button",
+            "component": "UIButton",
+            "style": {
+                "default": {
+                    "text": "Settings",
+                    "size": [256, 32],
+                    "position": [0, 460],
+                    "horizontalAlign": "center"
+                }
+            }
+        },
+
+        {
+            "id": "singleplayer-button",
+            "component": "UIButton",
+            "style": {
+                "default": {
+                    "text": "Single player",
+                    "size": [256, 32],
+                    "position": [0, 340],
+                    "horizontalAlign": "center"
+                }
+            }
+        },
+
+        {
+            "id": "hostgame-button",
+            "component": "UIButton",
+            "style": {
+                "default": {
+                    "text": "Host game",
+                    "size": [256, 32],
+                    "position": [0, 380],
+                    "horizontalAlign": "center"
+                }
+            }
+        },
+
+        {
+            "id": "joingame-button",
+            "component": "UIButton",
+            "style": {
+                "default": {
+                    "text": "Join game",
+                    "size": [256, 32],
+                    "position": [0, 420],
+                    "horizontalAlign": "center"
+                }
+            }
+        },
+
+        {
             "id": "exit-button",
             "component": "UIButton",
             "style": {
