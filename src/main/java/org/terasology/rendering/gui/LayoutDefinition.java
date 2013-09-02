@@ -54,9 +54,9 @@ public class LayoutDefinition implements AssetData {
         window.maximize();
         applyTo(window);
 
-        if(controller != null) {
-            UIController controller = instantiateController(this.controller);
-            controller.setWindow(window);
+        if (controller != null) {
+            UIController c = instantiateController(this.controller);
+            c.setWindow(window);
         }
 
         return window;
@@ -107,22 +107,22 @@ public class LayoutDefinition implements AssetData {
     }
 
     /**
-     * @todo this method an instantiateComponent must be properly refactored!
-     * @param controller
-     * @return
+     * @todo this method and instantiateComponent must be properly refactored!
      */
-    private UIController instantiateController(String controller) {
+    private UIController instantiateController(String c) {
+        String controllerName = c;
+
         // If the component is not given including package(s), assume that it
         // lives in the default widget package.
-        if(!controller.contains(".")) {
-            controller = defaultControllerPackage + "." + controller;
+        if (!controllerName.contains(".")) {
+            controllerName = defaultControllerPackage + "." + controllerName;
         }
 
-        Class controllerClass = null;
+        Class controllerClass;
         try {
-            controllerClass = Class.forName(controller);
+            controllerClass = Class.forName(controllerName);
         } catch (ClassNotFoundException e) {
-            logger.error("Could not find class matching controller '{}'", controller, e);
+            logger.error("Could not find class matching controller '{}'", controllerName, e);
             return null;
         }
 
@@ -130,7 +130,7 @@ public class LayoutDefinition implements AssetData {
         try {
             instance = (UIController) controllerClass.newInstance();
         } catch (ClassCastException | IllegalAccessException | InstantiationException e) {
-            logger.error("Could not intantiate class matching controller '{}'", controller, e);
+            logger.error("Could not instantiate class matching controller '{}'", controllerName, e);
             return null;
         }
 
@@ -144,7 +144,7 @@ public class LayoutDefinition implements AssetData {
             component = defaultWidgetPackage + "." + component;
         }
 
-        Class widgetClass = null;
+        Class widgetClass;
         try {
             widgetClass = Class.forName(component);
         } catch (ClassNotFoundException e) {
