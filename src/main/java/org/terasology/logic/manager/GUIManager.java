@@ -47,7 +47,6 @@ import org.terasology.rendering.gui.windows.UIMenuConfigAudio;
 import org.terasology.rendering.gui.windows.UIMenuConfigControls;
 import org.terasology.rendering.gui.windows.UIMenuConfigVideo;
 import org.terasology.rendering.gui.windows.UIMenuJoinServer;
-import org.terasology.rendering.gui.windows.UIMenuMain;
 import org.terasology.rendering.gui.windows.UIMenuPause;
 import org.terasology.rendering.gui.windows.UIMenuSelectWorld;
 import org.terasology.rendering.gui.windows.UIScreenConsole;
