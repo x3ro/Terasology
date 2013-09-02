@@ -87,7 +87,6 @@ public class GUIManager implements ComponentSystem {
 
     private void registerWindows() {
         //TODO parser action here! this is temporary
-        registeredWindows.put("main", UIMenuMain.class);
         registeredWindows.put("selectworld", UIMenuSelectWorld.class);
         registeredWindows.put("joinserver", UIMenuJoinServer.class);
         registeredWindows.put("config", UIMenuConfig.class);
@@ -283,8 +282,31 @@ public class GUIManager implements ComponentSystem {
             return window;
         }
 
+        // Keep the old loading mechanism around as long as there are windows that have
+        // not been converted to the JSON GUI system.
+        if (registeredWindows.containsKey(windowId)) {
+            return loadWindowOld(windowId);
+        }
+
         UIWindow w = (UIWindow) Assets.get(new AssetUri("layout:engine:" + windowId));
         return addWindow(w);
+    }
+
+    public UIWindow loadWindowOld(String windowId) {
+        Class<? extends UIWindow> windowClass = registeredWindows.get(windowId);
+
+        if (windowClass != null) {
+            logger.debug("Loading window with ID \"{}\".", windowId);
+            try {
+                return addWindow(windowClass.newInstance());
+            } catch (InstantiationException e) {
+                logger.error("Failed to load window {}, no default constructor", windowId);
+            } catch (IllegalAccessException e) {
+                logger.error("Failed to load window {}, no default constructor", windowId);
+            }
+        }
+        logger.warn("Unable to load window \"{}\", unknown id", windowId);
+        return null;
     }
 
     /**
