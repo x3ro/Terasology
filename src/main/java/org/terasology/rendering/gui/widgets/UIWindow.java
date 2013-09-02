@@ -233,10 +233,16 @@ public class UIWindow extends UIDisplayContainerScrollable implements Asset<Layo
         this.controller = controller;
     }
 
+    /**
+     * Retrieves a child widget for this window, by widget type and id. Even though the "type" variable is not used,
+     * it is necessary so that the method will return the correct type.
+     * @param type Class of the type of the widget to be returned
+     * @param id   ID of the widget as set in the JSON layout definition
+     */
     public <T extends UIDisplayElement> T getChild(Class<T> type, String id) {
         List<UIDisplayElement> elements = getDisplayElements();
-        for(UIDisplayElement el : elements) {
-            if(!el.getId().equals(id)) { continue; }
+        for (UIDisplayElement el : elements) {
+            if (!el.getId().equals(id)) { continue; }
             return (T) el;
         }
 
