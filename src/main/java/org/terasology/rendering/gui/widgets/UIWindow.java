@@ -153,10 +153,6 @@ public class UIWindow extends UIDisplayContainerScrollable implements Asset<Layo
         this.closeKeys = keys;
     }
 
-    public void setFoo(int test) {
-        System.out.println("setting foo to " + test);
-    }
-
     @Override
     public void setVisible(boolean visible) {
         if (!visible && isVisible()) {
