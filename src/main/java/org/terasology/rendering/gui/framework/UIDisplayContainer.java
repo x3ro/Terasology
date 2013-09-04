@@ -503,31 +503,6 @@ public abstract class UIDisplayContainer extends UIDisplayElement {
         }
     }
 
-    /**
-     * Set the position of the background image. On default the background will fill the whole display element.
-     *
-     * @param position The position.
-     */
-    public void setBackgroundImagePosition(Vector2f position) {
-        StyleBackgroundImage style = getStyle(StyleBackgroundImage.class);
-
-        if (style != null) {
-            style.setPosition(position);
-        }
-    }
-
-    /**
-     * Set the size of the background image. On default the background will fill the whole display element.
-     *
-     * @param size
-     */
-    public void setBackgroundImageSize(Vector2f size) {
-        StyleBackgroundImage style = getStyle(StyleBackgroundImage.class);
-
-        if (style != null) {
-            style.setSize(size);
-        }
-    }
 
     /**
      * Set the size of the background image including its unit. The unit can be pixel (px) or percentage (%). If no unit is given the default unit pixel will be used.
