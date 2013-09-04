@@ -7,13 +7,11 @@
             "id": "version-number",
             "component": "UILabel",
             "style": {
-                "default": {
-                    "text": "Pre Alpha",
-                    "position": [0, 230],
-                    "horizontalAlign": "center",
-                    "verticalAlign": "top",
-                    "textShadow": true
-                }
+                "text": "Pre Alpha",
+                "position": [0, 230],
+                "horizontalAlign": "center",
+                "verticalAlign": "top",
+                "textShadow": true
             }
         },
 
@@ -21,12 +19,10 @@
             "id": "terasology-logo",
             "component": "UIImage",
             "style": {
-                "default": {
-                    "image": "engine:terasology",
-                    "size": [512, 128],
-                    "position": [0, 128],
-                    "horizontalAlign": "center"
-                }
+                "image": "engine:terasology",
+                "size": [512, 128],
+                "position": [0, 128],
+                "horizontalAlign": "center"
             }
         },
 
@@ -34,12 +30,10 @@
             "id": "settings-button",
             "component": "UIButton",
             "style": {
-                "default": {
-                    "text": "Settings",
-                    "size": [256, 32],
-                    "position": [0, 460],
-                    "horizontalAlign": "center"
-                }
+                "text": "Settings",
+                "size": [256, 32],
+                "position": [0, 460],
+                "horizontalAlign": "center"
             }
         },
 
@@ -47,12 +41,10 @@
             "id": "singleplayer-button",
             "component": "UIButton",
             "style": {
-                "default": {
-                    "text": "Single player",
-                    "size": [256, 32],
-                    "position": [0, 340],
-                    "horizontalAlign": "center"
-                }
+                "text": "Single player",
+                "size": [256, 32],
+                "position": [0, 340],
+                "horizontalAlign": "center"
             }
         },
 
@@ -60,12 +52,10 @@
             "id": "hostgame-button",
             "component": "UIButton",
             "style": {
-                "default": {
-                    "text": "Host game",
-                    "size": [256, 32],
-                    "position": [0, 380],
-                    "horizontalAlign": "center"
-                }
+                "text": "Host game",
+                "size": [256, 32],
+                "position": [0, 380],
+                "horizontalAlign": "center"
             }
         },
 
@@ -73,12 +63,10 @@
             "id": "joingame-button",
             "component": "UIButton",
             "style": {
-                "default": {
-                    "text": "Join game",
-                    "size": [256, 32],
-                    "position": [0, 420],
-                    "horizontalAlign": "center"
-                }
+                "text": "Join game",
+                "size": [256, 32],
+                "position": [0, 420],
+                "horizontalAlign": "center"
             }
         },
 
@@ -86,19 +74,15 @@
             "id": "exit-button",
             "component": "UIButton",
             "style": {
-                "default": {
-                    "text": "Exit Terasology",
-                    "size": [256, 32],
-                    "position": [0, 540],
-                    "horizontalAlign": "center"
-                }
+                "text": "Exit Terasology",
+                "size": [256, 32],
+                "position": [0, 540],
+                "horizontalAlign": "center"
             }
         }
     ],
 
     "style": {
-        "default": {
-            "backgroundImage": "engine:menubackground"
-        }
+        "backgroundImage": "engine:menubackground"
     }
 }

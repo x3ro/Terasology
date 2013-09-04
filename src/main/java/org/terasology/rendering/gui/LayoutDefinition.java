@@ -37,7 +37,7 @@ public class LayoutDefinition implements AssetData {
     // attribute for a state. For example,
     //      style.get("hover").get("position")
     // Would get the "position" style attribute in the "hover" state.
-    public Map<String, Map<String, Object>> style;
+    public Map<String, Object> style;
     public List<LayoutDefinition> children;
 
     public final String defaultWidgetPackage = "org.terasology.rendering.gui.widgets";
@@ -74,7 +74,7 @@ public class LayoutDefinition implements AssetData {
 
         // Apply window styles
         if(style != null) {
-            for(Map.Entry<String, Object> e : style.get("default").entrySet()) {
+            for(Map.Entry<String, Object> e : style.entrySet()) {
                 StyleApplicator.applyStyle(window, e.getKey(), e.getValue());
             }
         }
@@ -97,7 +97,7 @@ public class LayoutDefinition implements AssetData {
             throw new IllegalArgumentException("Could not create widget with id " + id);
         }
 
-        for(Map.Entry<String, Object> e : style.get("default").entrySet()) {
+        for(Map.Entry<String, Object> e : style.entrySet()) {
             StyleApplicator.applyStyle(widget, e.getKey(), e.getValue());
         }
 
