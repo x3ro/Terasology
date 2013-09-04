@@ -234,6 +234,14 @@ public class UIWindow extends UIDisplayContainerScrollable implements Asset<Layo
     }
 
     /**
+     * Retrieves this window's controller and casts it to the given type.
+     * @throws ClassCastException if the supplied class does not match the controller's class.
+     */
+    public <T extends UIController> T getController(Class<T> type) {
+        return (T) controller;
+    }
+
+    /**
      * Retrieves a child widget for this window, by widget type and id. Even though the "type" variable is not used,
      * it is necessary so that the method will return the correct type.
      * @param type Class of the type of the widget to be returned
