@@ -18,6 +18,7 @@
         {
             "id": "terasology-logo",
             "component": "UIImage",
+            "styleClass": "defaultButtonStyle",
             "style": {
                 "image": "engine:terasology",
                 "size": [512, 128],
@@ -29,55 +30,50 @@
         {
             "id": "settings-button",
             "component": "UIButton",
+            "styleClass": "defaultButtonStyle",
             "style": {
                 "text": "Settings",
-                "size": [256, 32],
-                "position": [0, 460],
-                "horizontalAlign": "center"
+                "position": [0, 460]
             }
         },
 
         {
             "id": "singleplayer-button",
             "component": "UIButton",
+            "styleClass": "defaultButtonStyle",
             "style": {
                 "text": "Single player",
-                "size": [256, 32],
-                "position": [0, 340],
-                "horizontalAlign": "center"
+                "position": [0, 340]
             }
         },
 
         {
             "id": "hostgame-button",
             "component": "UIButton",
+            "styleClass": "defaultButtonStyle",
             "style": {
                 "text": "Host game",
-                "size": [256, 32],
-                "position": [0, 380],
-                "horizontalAlign": "center"
+                "position": [0, 380]
             }
         },
 
         {
             "id": "joingame-button",
             "component": "UIButton",
+            "styleClass": "defaultButtonStyle",
             "style": {
                 "text": "Join game",
-                "size": [256, 32],
-                "position": [0, 420],
-                "horizontalAlign": "center"
+                "position": [0, 420]
             }
         },
 
         {
             "id": "exit-button",
             "component": "UIButton",
+            "styleClass": "defaultButtonStyle",
             "style": {
                 "text": "Exit Terasology",
-                "size": [256, 32],
-                "position": [0, 540],
-                "horizontalAlign": "center"
+                "position": [0, 540]
             }
         }
     ],

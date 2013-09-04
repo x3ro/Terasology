@@ -29,6 +29,7 @@ import org.terasology.rendering.assets.mesh.ObjMeshLoader;
 import org.terasology.rendering.assets.shader.GLSLShaderLoader;
 import org.terasology.rendering.assets.texture.PNGTextureLoader;
 import org.terasology.rendering.gui.LayoutDefinitionLoader;
+import org.terasology.rendering.gui.StyleDefinitionLoader;
 import org.terasology.rendering.md5.MD5AnimationLoader;
 import org.terasology.rendering.md5.MD5SkeletonLoader;
 import org.terasology.world.block.loader.TileLoader;
@@ -71,7 +72,8 @@ public enum AssetType {
     SKELETON_MESH("skeletalmesh", "skeletalMesh", "md5mesh", new MD5SkeletonLoader()),
     ANIMATION("animation", "animations", "md5anim", new MD5AnimationLoader()),
     FONT("font", "fonts", "fnt", new FontLoader()),
-    LAYOUT_DEFINITION("layout", "layouts", "json", new LayoutDefinitionLoader());
+    LAYOUT_DEFINITION("layout", "layouts", "json", new LayoutDefinitionLoader()),
+    LAYOUT_STYLE_DEFINITION("style", "layoutStyles", "json", new StyleDefinitionLoader());
 
     private static Map<String, AssetType> typeIdLookup;
     private static Table<String, String, AssetType> subDirLookup;

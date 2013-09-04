@@ -18,6 +18,8 @@ package org.terasology.rendering.gui;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.terasology.asset.AssetData;
+import org.terasology.asset.AssetUri;
+import org.terasology.asset.Assets;
 import org.terasology.rendering.gui.framework.UIDisplayContainer;
 import org.terasology.rendering.gui.framework.UIDisplayElement;
 import org.terasology.rendering.gui.widgets.UIWindow;
@@ -32,6 +34,7 @@ public class LayoutDefinition implements AssetData {
     public String id;
     public String controller;
     public String component;
+    public String styleClass;
 
     // The outer elements are the element's states, the inner elements are style
     // attribute for a state. For example,
@@ -97,6 +100,10 @@ public class LayoutDefinition implements AssetData {
             throw new IllegalArgumentException("Could not create widget with id " + id);
         }
 
+        if (styleClass != null) {
+            applyStyleClassToWidget(widget, styleClass);
+        }
+
         for(Map.Entry<String, Object> e : style.entrySet()) {
             StyleApplicator.applyStyle(widget, e.getKey(), e.getValue());
         }
@@ -104,6 +111,17 @@ public class LayoutDefinition implements AssetData {
         widget.setId(id);
         widget.setVisible(true);
         return widget;
+    }
+
+    public void applyStyleClassToWidget(UIDisplayContainer widget, String clazz) {
+        StyleDefinition styleDef = Assets.getData(new AssetUri("style:engine:" + clazz), StyleDefinition.class);
+        if (styleDef == null) {
+            throw new IllegalArgumentException("The style class '" + clazz + "' could not be found");
+        }
+
+        for (Map.Entry<String, Object> e : styleDef.getStyle().entrySet()) {
+            StyleApplicator.applyStyle(widget, e.getKey(), e.getValue());
+        }
     }
 
     /**
