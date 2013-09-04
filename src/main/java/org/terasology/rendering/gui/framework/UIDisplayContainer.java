@@ -364,6 +364,27 @@ public abstract class UIDisplayContainer extends UIDisplayElement {
     }
 
     /**
+     * Like getStyle, but instead of returning null if the style does not exist, it is created.
+     * @param style
+     * @param <T>
+     * @return
+     */
+    public <T extends Style> T getOrCreateStyle(Class<T> style) {
+        T styleInstance = getStyle(style);
+
+        if (styleInstance == null) {
+            try {
+                return style.newInstance();
+            } catch (IllegalAccessException | InstantiationException e) {
+                throw new IllegalArgumentException("Could not instantiate style class " + style.getName());
+            }
+        }
+
+        addStyle(styleInstance);
+        return styleInstance;
+    }
+
+    /**
      * Add a style.
      *
      * @param style The style to add.
@@ -503,6 +524,13 @@ public abstract class UIDisplayContainer extends UIDisplayElement {
         }
     }
 
+    public void setBackgroundImageOrigin(Vector2f origin) {
+        getOrCreateStyle(StyleBackgroundImage.class).setTextureOrigin(origin);
+    }
+
+    public void setBackgroundImageSize(Vector2f size) {
+        getOrCreateStyle(StyleBackgroundImage.class).setTextureSize(size);
+    }
 
     /**
      * Set the size of the background image including its unit. The unit can be pixel (px) or percentage (%). If no unit is given the default unit pixel will be used.
