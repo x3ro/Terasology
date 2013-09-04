@@ -79,6 +79,15 @@ public final class Assets {
     }
 
     /**
+     * Returns only the AssetData for the specified AssetUri. Note that you need to provide
+     * the AssetData's class as the second parameter.
+     */
+    public static <T extends AssetData> T getData(AssetUri uri, Class<T> assetDataClass) {
+        return CoreRegistry.get(AssetManager.class).loadAssetData(uri, assetDataClass);
+    }
+
+
+    /**
      * @param name
      * @return The resolved asset, or
      */
