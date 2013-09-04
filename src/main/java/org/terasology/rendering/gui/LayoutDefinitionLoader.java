@@ -15,20 +15,20 @@
  */
 package org.terasology.rendering.gui;
 
-import com.google.common.base.Charsets;
-import com.google.common.io.Files;
 import com.google.gson.Gson;
 import org.terasology.asset.AssetLoader;
-import org.terasology.asset.AssetUri;
 import org.terasology.engine.module.Module;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.List;
 
-
+/**
+ * Loads a JSON GUI layout definition.
+ */
 public class LayoutDefinitionLoader implements AssetLoader<LayoutDefinition> {
-
     @Override
     public LayoutDefinition load(Module m, InputStream stream, List<URL> urls) throws IOException {
         Gson gson = new Gson();
