@@ -633,6 +633,27 @@ public abstract class UIDisplayContainer extends UIDisplayElement {
         }
     }
 
+    public void setBorderImage(String texture) {
+        StyleBorderImage style = getOrCreateStyle(StyleBorderImage.class);
+        style.setTexture(Assets.getTexture(texture));
+        style.setVisible(true);
+    }
+
+    public void setBorderImageOrigin(Vector2f origin) {
+        StyleBorderImage style = getOrCreateStyle(StyleBorderImage.class);
+        style.setSourceOrigin(origin);
+    }
+
+    public void setBorderImageSize(Vector2f size) {
+        StyleBorderImage style = getOrCreateStyle(StyleBorderImage.class);
+        style.setSourceSize(size);
+    }
+
+    public void setBorderSize(Vector4f size) {
+        StyleBorderImage style = getOrCreateStyle(StyleBorderImage.class);
+        style.setWidth(size);
+    }
+
     /**
      * Remove the border image.
      */
