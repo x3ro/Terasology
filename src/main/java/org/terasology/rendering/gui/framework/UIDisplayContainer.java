@@ -374,13 +374,13 @@ public abstract class UIDisplayContainer extends UIDisplayElement {
 
         if (styleInstance == null) {
             try {
-                return style.newInstance();
+                styleInstance = style.newInstance();
+                addStyle(styleInstance);
             } catch (IllegalAccessException | InstantiationException e) {
                 throw new IllegalArgumentException("Could not instantiate style class " + style.getName());
             }
         }
 
-        addStyle(styleInstance);
         return styleInstance;
     }
 
