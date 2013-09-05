@@ -29,6 +29,8 @@ import java.util.Map;
  */
 public class StyleBorderImage extends UIDisplayContainer implements Style {
 
+    private boolean initialized = false;
+
     private Texture texture;
     private Vector4f width = new Vector4f(0f, 0f, 0f, 0f);
     private Vector2f sourceOrigin;
@@ -40,9 +42,13 @@ public class StyleBorderImage extends UIDisplayContainer implements Style {
     private final Map<String, UIImage> frames = new HashMap<String, UIImage>();
     private final Map<String, UIImage> corners = new HashMap<String, UIImage>();
 
-    public StyleBorderImage(Texture texture) {
-        this.texture = texture;
+    public StyleBorderImage() {
         setCrop(false);
+    }
+
+    public StyleBorderImage(Texture texture) {
+        this();
+        this.texture = texture;
     }
 
     /**
@@ -254,6 +260,18 @@ public class StyleBorderImage extends UIDisplayContainer implements Style {
             targetCorner("top-right");
             targetCorner("bottom-left");
             targetCorner("bottom-right");
+        } else if (!initialized && sourceOrigin != null && sourceSize != null) {
+            initialized = true;
+
+            sourceFrame("top");
+            sourceFrame("bottom");
+            sourceFrame("right");
+            sourceFrame("left");
+
+            sourceCorner("top-left");
+            sourceCorner("top-right");
+            sourceCorner("bottom-left");
+            sourceCorner("bottom-right");
         }
     }
 
@@ -263,6 +281,18 @@ public class StyleBorderImage extends UIDisplayContainer implements Style {
 
     public Texture getTexture() {
         return texture;
+    }
+
+    public void setSourceOrigin(Vector2f sourceOrigin) {
+        this.sourceOrigin = sourceOrigin;
+    }
+
+    public void setSourceSize(Vector2f sourceSize) {
+        this.sourceSize = sourceSize;
+    }
+
+    public void setWidth(Vector4f width) {
+        this.width = width;
     }
 
     @Override
