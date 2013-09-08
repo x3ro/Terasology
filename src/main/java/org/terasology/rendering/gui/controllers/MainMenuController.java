@@ -23,6 +23,7 @@ import org.terasology.rendering.gui.UIController;
 import org.terasology.rendering.gui.framework.UIDisplayElement;
 import org.terasology.rendering.gui.framework.events.ClickListener;
 import org.terasology.rendering.gui.widgets.UIButton;
+import org.terasology.rendering.gui.widgets.UIWindow;
 import org.terasology.rendering.gui.windows.UIMenuSelectWorld;
 
 
@@ -35,7 +36,10 @@ public class MainMenuController extends UIController {
             @Override
             public void click(UIDisplayElement element, int button) {
                 window.getGUIManager().openWindow("selectworld");
-                ((UIMenuSelectWorld) window.getGUIManager().getWindowById("selectworld")).setCreateServerGame(false);
+
+                SelectWorldController controller =
+                        UIWindow.getGUIManager().getFocusedWindow().getController(SelectWorldController.class);
+                controller.setCreateServerGame(false);
             }
         });
 
@@ -43,7 +47,10 @@ public class MainMenuController extends UIController {
             @Override
             public void click(UIDisplayElement element, int button) {
                 window.getGUIManager().openWindow("selectworld");
-                ((UIMenuSelectWorld) window.getGUIManager().getWindowById("selectworld")).setCreateServerGame(true);
+
+                SelectWorldController controller =
+                        UIWindow.getGUIManager().getFocusedWindow().getController(SelectWorldController.class);
+                controller.setCreateServerGame(true);
             }
         });
 

@@ -1,0 +1,71 @@
+{
+    "id": "selectworld",
+    "controller": "SelectWorldController",
+
+    "children": [
+        {
+            "id": "world-selector",
+            "component": "UIList",
+            "style": {
+                "size": [512, 256],
+                "padding": [10, 5, 10, 5],
+                "position": [0, 230],
+                "horizontalAlign": "center",
+                "backgroundImage": "engine:gui_menu",
+                "backgroundImageSize": [159, 63],
+                "backgroundImageOrigin": [264, 18],
+                "borderImage": "engine:gui_menu",
+                "borderImageOrigin": [256, 0],
+                "borderImageSize": [175, 88],
+                "borderSize": [16, 7, 7, 7]
+            }
+        },
+
+        {
+            "id": "back-button",
+            "component": "UIButton",
+            "styleClass": "defaultButtonStyle",
+            "style": {
+                "text": "Back",
+                "position": [0, 600]
+            }
+        },
+
+        {
+            "id": "load-button",
+            "component": "UIButton",
+            "styleClass": "defaultButtonStyle",
+            "style": {
+                "text": "Load",
+                "position": [30, 505],
+                "size": [128, 32]
+            }
+        },
+
+        {
+            "id": "delete-button",
+            "component": "UIButton",
+            "styleClass": "defaultButtonStyle",
+            "style": {
+                "text": "Delete",
+                "position": [196, 505],
+                "size": [128, 32]
+            }
+        },
+
+        {
+            "id": "create-button",
+            "component": "UIButton",
+            "styleClass": "defaultButtonStyle",
+            "style": {
+                "text": "Create new world",
+                "position": [-166, 505],
+                "size": [192, 32]
+            }
+        }
+    ],
+
+    "style": {
+        "backgroundImage": "engine:menubackground"
+    }
+}

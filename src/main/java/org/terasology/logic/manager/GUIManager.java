@@ -86,7 +86,6 @@ public class GUIManager implements ComponentSystem {
 
     private void registerWindows() {
         //TODO parser action here! this is temporary
-        registeredWindows.put("selectworld", UIMenuSelectWorld.class);
         registeredWindows.put("joinserver", UIMenuJoinServer.class);
         registeredWindows.put("config", UIMenuConfig.class);
         registeredWindows.put("config:video", UIMenuConfigVideo.class);

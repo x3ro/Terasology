@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.terasology.rendering.gui.windows;
+package org.terasology.rendering.gui.controllers;
 
 import com.google.common.collect.Maps;
 import org.slf4j.Logger;
@@ -25,16 +25,15 @@ import org.terasology.engine.modes.StateLoading;
 import org.terasology.engine.paths.PathManager;
 import org.terasology.game.GameManifest;
 import org.terasology.network.NetworkMode;
+import org.terasology.rendering.gui.UIController;
 import org.terasology.rendering.gui.dialogs.UIDialogCreateNewWorld;
 import org.terasology.rendering.gui.framework.UIDisplayElement;
 import org.terasology.rendering.gui.framework.events.ClickListener;
 import org.terasology.rendering.gui.widgets.UIButton;
 import org.terasology.rendering.gui.widgets.UIList;
 import org.terasology.rendering.gui.widgets.UIListItem;
-import org.terasology.rendering.gui.widgets.UIWindow;
 import org.terasology.utilities.FilesUtil;
 
-import javax.vecmath.Vector2f;
 import javax.vecmath.Vector4f;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
@@ -48,123 +47,70 @@ import java.util.Date;
 import java.util.Map;
 import java.util.SortedMap;
 
-/**
- * Select world menu screen.
- *
- * @author Anton Kireev <adeon.k87@gmail.com>
- */
-public class UIMenuSelectWorld extends UIWindow {
-    private static final Logger logger = LoggerFactory.getLogger(UIMenuSelectWorld.class);
+public class SelectWorldController extends UIController {
+    private static final Logger logger = LoggerFactory.getLogger(SelectWorldController.class);
 
-    final UIList list;
-    final UIButton goToBack;
-    final UIButton createNewWorld;
-    final UIButton loadFromList;
-    final UIButton deleteFromList;
+    private UIList list;
 
-    private boolean createServerGame;
+    /**
+     * Whether or not selecting a game in the world selector will launch
+     * a multi-player (i.e. server) game.
+     */
+    private boolean createServerGame = false;
 
-    public UIMenuSelectWorld() {
-        setId("selectworld");
-        setBackgroundImage("engine:menubackground");
-        setModal(true);
-        maximize();
+    @Override
+    public void initialize() {
 
-        list = new UIList();
-        list.setSize(new Vector2f(512f, 256f));
-        list.setPadding(new Vector4f(10f, 5f, 10f, 5f));
-        list.setBackgroundImage("engine:gui_menu", new Vector2f(264f, 18f), new Vector2f(159f, 63f));
-        list.setBorderImage("engine:gui_menu", new Vector2f(256f, 0f), new Vector2f(175f, 88f), new Vector4f(16f, 7f, 7f, 7f));
+        list = window.getChild(UIList.class, "world-selector");
         list.addDoubleClickListener(new ClickListener() {
             @Override
             public void click(UIDisplayElement element, int button) {
                 loadSelectedWorld();
             }
         });
-        list.setHorizontalAlign(EHorizontalAlign.CENTER);
-        list.setPosition(new Vector2f(0f, 230f));
-        list.setVisible(true);
 
-        goToBack = new UIButton(new Vector2f(256f, 32f), UIButton.ButtonType.NORMAL);
-        goToBack.getLabel().setText("Back");
-        goToBack.addClickListener(new ClickListener() {
+        window.getChild(UIButton.class, "back-button").addClickListener(new ClickListener() {
             @Override
             public void click(UIDisplayElement element, int button) {
-                getGUIManager().openWindow("main");
+                window.getGUIManager().openWindow("main");
             }
         });
-        goToBack.setHorizontalAlign(EHorizontalAlign.CENTER);
-        goToBack.setPosition(new Vector2f(0f, 600f));
-        goToBack.setVisible(true);
 
-        loadFromList = new UIButton(new Vector2f(128f, 32f), UIButton.ButtonType.NORMAL);
-        loadFromList.getLabel().setText("Load");
-        loadFromList.addClickListener(new ClickListener() {
+        window.getChild(UIButton.class, "load-button").addClickListener(new ClickListener() {
             @Override
             public void click(UIDisplayElement element, int button) {
                 loadSelectedWorld();
             }
         });
-        loadFromList.setHorizontalAlign(EHorizontalAlign.CENTER);
-        loadFromList.setPosition(new Vector2f(30f, 505f));
-        loadFromList.setVisible(true);
 
-        deleteFromList = new UIButton(new Vector2f(128f, 32f), UIButton.ButtonType.NORMAL);
-        deleteFromList.getLabel().setText("Delete");
-        deleteFromList.addClickListener(new ClickListener() {
+        window.getChild(UIButton.class, "delete-button").addClickListener(new ClickListener() {
             @Override
             public void click(UIDisplayElement element, int button) {
-                if (list.getSelection() == null) {
-                    getGUIManager().showMessage("Error", "Please choose a saved game first.");
-                    return;
-                }
-
-                try {
-                    GameManifest gameManifest = (GameManifest) list.getSelection().getValue();
-                    Path world = PathManager.getInstance().getSavePath(gameManifest.getTitle());
-                    FilesUtil.recursiveDelete(world);
-                    list.removeItem(list.getSelectionIndex());
-                } catch (Exception e) {
-                    logger.error("Failed to delete saved game", e);
-                    getGUIManager().showMessage("Error", "Failed to remove saved game - sorry.");
-                }
+                deleteSelectedWorld();
             }
         });
-        deleteFromList.setHorizontalAlign(EHorizontalAlign.CENTER);
-        deleteFromList.setPosition(new Vector2f(196f, 505f));
-        deleteFromList.setVisible(true);
 
-        createNewWorld = new UIButton(new Vector2f(192f, 32f), UIButton.ButtonType.NORMAL);
-        createNewWorld.getLabel().setText("Create new world");
-        createNewWorld.addClickListener(new ClickListener() {
+        window.getChild(UIButton.class, "create-button").addClickListener(new ClickListener() {
             @Override
             public void click(UIDisplayElement element, int button) {
                 UIDialogCreateNewWorld dialog = new UIDialogCreateNewWorld(createServerGame);
                 dialog.open();
             }
         });
-        createNewWorld.setHorizontalAlign(EHorizontalAlign.CENTER);
-        createNewWorld.setPosition(new Vector2f(-166f, 505f));
-        createNewWorld.setVisible(true);
+
 
         fillList();
-
-        addDisplayElement(list);
-        addDisplayElement(loadFromList);
-        addDisplayElement(goToBack);
-        addDisplayElement(createNewWorld);
-        addDisplayElement(deleteFromList);
     }
 
     private void loadSelectedWorld() {
 
         if (list.getItemCount() < 1) {
-            getGUIManager().showMessage("Error", "You did not create a world yet!");
+            window.getGUIManager().showMessage("Error", "You did not create a world yet!");
             return;
         }
 
         if (list.getSelection() == null) {
-            getGUIManager().showMessage("Error", "Please choose a world!");
+            window.getGUIManager().showMessage("Error", "Please choose a world!");
             return;
         }
 
@@ -176,7 +122,24 @@ public class UIMenuSelectWorld extends UIWindow {
             config.getWorldGeneration().setWorldTitle(info.getTitle());
             CoreRegistry.get(GameEngine.class).changeState(new StateLoading(info, (createServerGame) ? NetworkMode.SERVER : NetworkMode.NONE));
         } catch (Exception e) {
-            getGUIManager().showMessage("Error", "Failed reading saved game. Sorry.");
+            window.getGUIManager().showMessage("Error", "Failed reading saved game. Sorry.");
+        }
+    }
+
+    public void deleteSelectedWorld() {
+        if (list.getSelection() == null) {
+            window.getGUIManager().showMessage("Error", "Please choose a saved game first.");
+            return;
+        }
+
+        try {
+            GameManifest gameManifest = (GameManifest) list.getSelection().getValue();
+            Path world = PathManager.getInstance().getSavePath(gameManifest.getTitle());
+            FilesUtil.recursiveDelete(world);
+            list.removeItem(list.getSelectionIndex());
+        } catch (Exception e) {
+            logger.error("Failed to delete saved game", e);
+            window.getGUIManager().showMessage("Error", "Failed to remove saved game - sorry.");
         }
     }
 
