@@ -9,13 +9,13 @@ public abstract class UIController {
     public void setWindow(UIWindow w) {
         window = w;
         w.setController(this);
-        registerEventHandlers();
+        initialize();
     }
 
     /**
      * Invoked after the window and all its widgets have been created, this method should be
-     * used to add event handlers for the widgets if necessary. To access the individual widgets,
-     * UIWindow#getChild with the widget id should be used.
+     * used to add event handlers for the widgets if necessary, or to perform other initialization.
+     * To access the individual widgets, UIWindow#getChild with the widget id should be used.
      */
-    abstract public void registerEventHandlers();
+    abstract public void initialize();
 }

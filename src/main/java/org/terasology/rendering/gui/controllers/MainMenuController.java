@@ -15,7 +15,7 @@ public class MainMenuController extends UIController {
     private static final Logger logger = LoggerFactory.getLogger(MainMenuController.class);
 
     @Override
-    public void registerEventHandlers() {
+    public void initialize() {
         window.getChild(UIButton.class, "singleplayer-button").addClickListener(new ClickListener() {
             @Override
             public void click(UIDisplayElement element, int button) {
